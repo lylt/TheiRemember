@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
 				Record r= new Record(tittle,body);
 				dataHelper.INSERT_RECORD(r);
 				dataHelper.close();
+				/// I love you
 			}
 		});
 	}
