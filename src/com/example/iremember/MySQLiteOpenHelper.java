@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -61,24 +62,35 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 		 public Cursor SELECT_ALL__RECORD() {
 		 return database.query(TB_NAME, null, null, null, null, null, null);
 		 }
-		 
-		// neu DB cua cac ban co nhieu bang cac ban co the viet them cac
-		 // phuong thuc update,insert,delete,select cho cac bang nay tiep o ben duoi
-		 
-		 //.....
-		 
-		 // minh viet phuong thuc chung dung de SELECT trong CSDL DB_NAME = "MyDataBase.db"
-		 // khi truyen vao 1 cau select sql voi 1 bang bat ky trong DB thi ket qua tra ra la cursor
+		
 		 
 		 public Cursor SELECTSQL(String sql) {
 		 return database.rawQuery(sql, null);
 		 }
 		 
-		// phuong thuc nay de dong DB khi khong su dung
 		 public void CloseBD() {
 		 if (database != null && database.isOpen())
 		 database.close();
 		 }
-		 
+		 public void openDB()throws SQLException{
+			 String DB_Path="/data/data/com.example.iremember/databases/";
+			 String myPath=DB_Path+DB_NAME;
+			 database.openDatabase(myPath,null, SQLiteDatabase.OPEN_READONLY);
+		 }
+		 public String getData(){
+			 String slQuery="SELECT *FROM "+TB_NAME;
+			 SQLiteDatabase db=this.getReadableDatabase();
+			 Cursor cursor=db.rawQuery(slQuery, null);
+			 String data="";
+			 if(cursor.moveToFirst()){
+				 do{
+					data+=cursor.getString(1)+"/";
+				data+=cursor.getString(2)+"/";
+				 }while(cursor.moveToNext());
+			 }
+			 db.close();
+			 return data;
+			 
+		 }
 
 }

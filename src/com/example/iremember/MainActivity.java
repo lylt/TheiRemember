@@ -3,6 +3,7 @@ package com.example.iremember;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,7 +41,9 @@ public class MainActivity extends Activity {
 				Record r= new Record(tittle,body);
 				dataHelper.INSERT_RECORD(r);
 				dataHelper.close();
-				/// I love you
+				Intent mIntent= new Intent(getApplicationContext(),FirstScreen.class);
+				startActivity(mIntent);
+				
 			}
 		});
 	}
