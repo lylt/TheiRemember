@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Record	implements Serializable {
 	private String tittle;
 	private String body;
+	private String Time;
 	public Record(){
 		tittle="";
 		body="";
@@ -20,10 +21,22 @@ public class Record	implements Serializable {
 	public void setTittle(String tittle) {
 		this.tittle = tittle;
 	}
+	public Record(String tittle, String body, String time) {
+		super();
+		this.tittle = tittle;
+		this.body = body;
+		Time = time;
+	}
 	public String getBody() {
 		return body;
 	}
 	public void setBody(String body) {
 		this.body = body;
+	}
+	public String getTime() {
+		return Time;
+	}
+	public void setTime(String time) {
+		Time = time;
 	}
 }
